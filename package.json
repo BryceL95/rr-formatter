@@ -1,0 +1,42 @@
+{
+  "name": "rr12",
+  "displayName": "RR12",
+  "description": "New language to support RR12 syntax.",
+  "version": "1.0.0",
+  "engines": {
+    "vscode": "^1.77.0"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.98.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "rr12",
+        "aliases": [
+          "rr12"
+        ],
+        "extensions": [
+          ".rr12"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "rr12",
+        "scopeName": "source.rr12",
+        "path": "./syntaxes/rr12.tmLanguage.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "extension.formatCustomLang",
+        "title": "Format CustomLang"
+      }
+    ]
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "RR12",
+  "patterns": [
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#operators"
+    }
+  ],
+  "repository": {
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.rr12",
+          "match": "(?i)\\b(if|switch|choose)\\b"
+        },
+        {
+          "name": "entity.name.function",
+          "match": "(?i)\\b(left|right|mid|instr|instr2|SplitString|val|len|lcase|ucase|trim|string|replace|reduceChars|removeAccents|chr|asc|ordinal|similarity|CorrectSpelling|stringCount)\\b"
+        },
+        {
+          "name": "entity.name.function",
+          "match": "(?i)\\b(int|sqrt|quersumme|abs|round|speed|pace)\\b"
+        },
+        {
+          "name": "entity.name.function",
+          "match": "(?i)\\b(TCount|TCountIf|TTCount)\\b"
+        },
+        {
+          "name": "entity.name.function",
+          "match": "(?i)\\b(TSum|TRSum|TTSum|TTRSum)\\b"
+        },
+        {
+          "name": "entity.name.function",
+          "match": "(?i)\\b(TMin|TRMin|TMinID|TMinText|TMinName|TTMin|TTRMin|TTMinID|TTMinText|TTMinName|TTMinIndex|TMinIf)\\b"
+        },
+        {
+          "name": "entity.name.function",
+          "match": "(?i)\\b(TAvg|TTAvg|TTRAvg)\\b"
+        },
+        {
+          "name": "entity.name.function",
+          "match": "(?i)\\b(TMax|TRMax|TMaxID|TMaxText|TMaxName|TTMax|TTRMax|TTMaxID|TTMaxText|TTMaxName|TTMaxIndex|TMaxIf)\\b"
+        },
+        {
+          "name": "entity.name.function",
+          "match": "(?i)\\b(TFirst|TRFirst|TFirstID|TFirstText|TFirstName|TTFirst|TTRFirst|TTFirstID|TTFirstText|TTFirstName|TTFirstIndex)\\b"
+        },
+        {
+          "name": "entity.name.function",
+          "match": "(?i)\\b(TLast|TRLast|TLastID|TLastText|TLastName|TTLast|TTRLast|TTLastID|TTLastText|TTLastName|TTLastIndex)\\b"
+        },
+        {
+          "name": "entity.name.function",
+          "match": "(?i)\\b(T|TR|TName|TText)\\b"
+        },
+        {
+          "name": "entity.name.function",
+          "match": "(?i)\\b(DMaxMin)\\b"
+        },
+        {
+          "name": "entity.name.function",
+          "match": "(?i)\\b(urlencode|NumberToWords|ZahlInWort|TimeFromString|md5|crc7)\\b"
+        },
+        {
+          "name": "entity.name.function",
+          "match": "(?i)\\b(format|date|now|ElapsedTime|AgeOnDate)\\b"
+        },
+        {
+          "name": "entity.name.function",
+          "match": "(?i)\\b(inRange|isNumeric|isAlpha|hasChip|search|isUCICode|isUCID|hasEntryFee)\\b"
+        },
+        {
+          "name": "entity.name.function",
+          "match": "(?i)\\b(BunchTime|GapTimeTop|GapTimePrev|TeamGapTimeTop|TeamGapTimePrev|DCount|DSum|DMin|DAvg|DMax|DFirst|DLast|DConcat|DQuantile)\\b"
+        },
+        {
+          "name": "entity.name.function",
+          "match": "(?i)\\b(nz|min|max|first|last|table|Setting|GetSex|translate|rank|Text|EntryFeeMatrix)\\b"
+        },
+        {
+          "name": "entity.name.function",
+          "match": "(?i)\\b(AgeGradedOC2015|AgeGradedLevel2015|AgeGradedFactor2015)\\b"
+        },
+        {
+          "name": "entity.name.function",
+          "match": "(?i)\\b(AgeGradedOC2020|AgeGradedLevel2020|AgeGradedFactor2020)\\b"
+        },
+        {
+          "name": "constant.numeric.decimal",
+          "match": "(?i)\\b([0-9]+)\\b"
+        },
+        {
+          "begin": "\\[",
+          "end": "\\]",
+          "beginCaptures": {
+            "0": { "name": "punctuation.paren.open" }
+          },
+          "endCaptures": {
+            "0": { "name": "punctuation.paren.close" }
+          },
+          "name": "variable.name",
+          "patterns": [{ "name": "constant.numeric", "match": "\\b(Event.|Contest.|T[0-9]+|Time[0-9]+.|TS[0-9]+.)\\b" }]
+        },
+        {
+          "begin": "\\\"",
+          "end": "\\\"",
+          "beginCaptures": {
+            "0": { "name": "string.quoted.double" }
+          },
+          "endCaptures": {
+            "0": { "name": "string.quoted.double" }
+          },
+          "name": "string"
+        }
+      ]
+    },
+    "operators": {
+      "patterns": [
+        {
+          "name": "keyword.operator.comparison.rr12",
+          "match": "\\<|\\>|\\<=|\\>=|\\=|<>|\\|"
+        },
+        {
+          "name": "keyword.operator.assignment.compound.rr12",
+          "match": "\\+|\\-|\\*|\\%|\\:|\\^|\\/|\\&"
+        },
+        {
+          "name": "keyword.operator.logical.rr12",
+          "match": "OR|XOR|AND|IN|NIN"
+        }
+      ]
+    },
+    "variables": {
+      "patterns": [
+        {
+          "name": "variable.other",
+          "match": "\\bEvent ([a-z.]+])"
+        }
+      ]
+    }
+  },
+  "scopeName": "source.rr12"
+}
