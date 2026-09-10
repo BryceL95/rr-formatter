@@ -1,0 +1,38 @@
+/* Short expressions stay on one line. */
+if([Sex]="f";"I";"")
+[Firstname]&" "&[Lastname]
+1:30:00
+
+/* Sloppy spacing gets normalised. */
+if(  [Bib]=1 ;   "yes"   ;"no"  )
+tsum( "Lap{n}" ; 1 ; 10 )
+
+/* Long expressions expand, one argument per line. */
+if([Contest]=1;TSum("Lap{n}";1;[Contest.Laps]);TMax("Bonus{n}";1;[Contest.Laps]))
+if(inRange([Age];18;39);"Senior";if(inRange([Age];40;59);"Masters";"Veteran"))
+
+/* A long concatenation chain breaks with the operator leading. */
+[Firstname] & " " & [Lastname] & " (" & [Contest.Name] & ", " & [AgeGroup.Name] & ")"
+
+/* Parentheses are reproduced exactly, never added or removed. */
+(([NumberOfLaps]-1)*10)+1
+
+/* Strings and full-text expressions are byte-for-byte. */
+if([Contest]=1;"{EN:yes|ES:si}";"no")
+#My name is [FirstName] [LastName]
+
+/* Word operators are uppercased. */
+[Lastname]="Miller" and [City]="New York"
+[Bib] in "1;2;3" or [Time.Exists]=1
+
+/* An already-expanded expression collapses again when it now fits. */
+if([Bib]=1;
+    "yes";
+    "no"
+)
+
+/* Comments keep their place. */
+if([a]=1;
+    /* the yes branch */
+    "y";
+    "n") /* trailing */

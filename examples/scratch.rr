@@ -1,0 +1,45 @@
+/* A scratch file: many expressions, one per line, copied into RACE RESULT
+   as needed. Press Shift+Alt+F to format the whole file. */
+
+/* --- Names and labels ------------------------------------------------- */
+
+[Firstname] & " " & [Lastname]
+
+[Firstname] & " " & [Lastname] & " (" & [Contest.Name] & ", " & [AgeGroup.Name] & ")"
+
+#My name is [Firstname] [Lastname]
+
+lcase(left([Lastname];1)) & lcase(mid([Lastname];2))
+
+/* --- Conditionals ----------------------------------------------------- */
+
+if([Sex]="f";"I";"")
+
+if([Contest]=1;"{EN:yes|ES:si}";"no")
+
+if(inRange([Age];18;39);"Senior";if(inRange([Age];40;59);"Masters";"Veteran"))
+
+/* --- Results and times ------------------------------------------------ */
+
+TSum("Lap{n}";1;[Contest.Laps])
+
+if([Contest]=1;TSum("Lap{n}";1;[Contest.Laps]);TMax("Bonus{n}";1;[Contest.Laps]))
+
+format(TimeFromString([T1.Text]);"hh:mm:ss")
+
+speed([T1];[Contest.Length.Meter])
+
+/* --- Filters ---------------------------------------------------------- */
+
+[Lastname]="Miller" and [City]="New York"
+
+[Bib] in "1;2;3" or [Time.Exists]=1
+
+/* --- Try these to see the other features ------------------------------
+
+   - Type "tsum(" in lower case, then format: it becomes "TSum(".
+   - Type "TSumm(" : the name loses its function colour and the Problems
+     panel explains why.
+   - Delete a closing bracket: formatting declines rather than mangling
+     the file, and the error is marked in place.
+   ---------------------------------------------------------------------- */

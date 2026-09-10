@@ -1,0 +1,230 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "RACE RESULT",
+  "scopeName": "source.rr",
+  "patterns": [
+    {
+      "include": "#comment"
+    },
+    {
+      "include": "#fulltext"
+    },
+    {
+      "include": "#string"
+    },
+    {
+      "include": "#field"
+    },
+    {
+      "include": "#brace"
+    },
+    {
+      "include": "#number"
+    },
+    {
+      "include": "#control"
+    },
+    {
+      "include": "#library-function"
+    },
+    {
+      "include": "#unknown-function"
+    },
+    {
+      "include": "#word-operator"
+    },
+    {
+      "include": "#symbol-operator"
+    },
+    {
+      "include": "#punctuation"
+    }
+  ],
+  "repository": {
+    "comment": {
+      "name": "comment.block.rr",
+      "begin": "/\\*",
+      "end": "\\*/",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.comment.begin.rr"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.comment.end.rr"
+        }
+      }
+    },
+    "fulltext": {
+      "name": "meta.fulltext.rr",
+      "begin": "#",
+      "end": "$",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.fulltext.rr"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#field"
+        }
+      ],
+      "contentName": "string.unquoted.fulltext.rr"
+    },
+    "string": {
+      "name": "string.quoted.double.rr",
+      "begin": "\"",
+      "end": "\"",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.rr"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.rr"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#translation"
+        }
+      ]
+    },
+    "translation": {
+      "name": "constant.language.translation.rr",
+      "begin": "\\{(?=[A-Za-z]{2}:)",
+      "end": "\\}",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.translation.begin.rr"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.translation.end.rr"
+        }
+      },
+      "patterns": [
+        {
+          "name": "entity.name.tag.language.rr",
+          "match": "(?<=[{|])[A-Za-z]{2}(?=:)"
+        },
+        {
+          "name": "punctuation.separator.translation.rr",
+          "match": "\\|"
+        }
+      ]
+    },
+    "field": {
+      "name": "meta.field.rr",
+      "begin": "\\[",
+      "end": "\\]",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.field.begin.rr"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.field.end.rr"
+        }
+      },
+      "contentName": "variable.other.field.rr",
+      "patterns": [
+        {
+          "name": "support.type.field-prefix.rr",
+          "match": "(?i)(?<![A-Za-z0-9_])(?:AgeGroup2|AgeGroup3|AgeGroup|Contest|Invoice|Voucher|Event|Time0|Time|OP|(?:TS|TR|T|Time|Rank)[0-9]+)(?=\\.)"
+        },
+        {
+          "name": "punctuation.accessor.rr",
+          "match": "\\."
+        },
+        {
+          "include": "#brace"
+        }
+      ]
+    },
+    "brace": {
+      "name": "meta.brace.rr",
+      "begin": "\\{",
+      "end": "\\}",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.brace.begin.rr"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.brace.end.rr"
+        }
+      },
+      "contentName": "variable.other.selector.rr"
+    },
+    "number": {
+      "name": "constant.numeric.rr",
+      "match": "(?<![A-Za-z0-9_.])[0-9]+(?:\\.[0-9]+)?"
+    },
+    "control": {
+      "name": "keyword.control.conditional.rr",
+      "match": "(?i)\\b(?:choose|switch|if)\\b(?=\\s*\\()"
+    },
+    "library-function": {
+      "name": "support.function.rr",
+      "match": "(?i)\\b(?:AgeGradedFactor2015|AgeGradedFactor2020|AgeGradedFactor2025|AgeGradedLevel2015|AgeGradedLevel2020|AgeGradedLevel2025|AgeGradedOC2015|AgeGradedOC2020|AgeGradedOC2025|CorrectSpelling|TeamGapTimePrev|DCountDistinct|EntryFeeMatrix|TeamGapTimeTop|TimeFromString|NumberToWords|removeAccents|isValidEmail|TTFirstIndex|ChipFileHas|ElapsedTime|GapTimeLast|GapTimeNext|GapTimePrev|hasEntryFee|reduceChars|SplitString|stringCount|TTFirstName|TTFirstText|TTLastIndex|ChangeLink|GapTimeTop|isEligible|similarity|TFirstName|TFirstText|TTLastName|TTLastText|TTMaxIndex|TTMinIndex|ZahlInWort|AgeOnDate|BunchTime|DQuantile|isNumeric|isUCICode|quersumme|TLastName|TLastText|translate|TTFirstID|TTMaxName|TTMaxText|TTMinName|TTMinText|urlencode|TCountIf|TFirstID|TMaxIfID|TMaxName|TMaxText|TMinIfID|TMinName|TMinText|TTLastID|TTRFirst|DConcat|DMaxMin|hasChip|inRange|isAlpha|isUCIID|ordinal|RankMax|replace|Setting|TLastID|TRFirst|TTCount|TTFirst|TTMaxID|TTMinID|TTRLast|DCount|DFirst|format|GetSex|instr2|search|string|TCount|TFirst|TMaxID|TMaxIf|TMinID|TMinIf|TRLast|TTLast|TTRAvg|TTRMax|TTRMin|TTRSum|DLast|first|instr|lcase|right|round|speed|table|TLast|TName|TPrev|TRAvg|TRMax|TRMin|TRSum|TTAvg|TText|TTMax|TTMin|TTSum|ucase|crc7|date|DAvg|DMax|DMin|DSum|last|left|pace|Rank|sqrt|TAvg|Text|TMax|TMin|trim|TSum|abs|asc|chr|int|len|max|md5|mid|min|now|val|nz|TR|T)\\b(?=\\s*\\()"
+    },
+    "unknown-function": {
+      "name": "entity.name.function.rr",
+      "match": "\\b[A-Za-z_][A-Za-z0-9_]*\\b(?=\\s*\\()"
+    },
+    "word-operator": {
+      "patterns": [
+        {
+          "name": "keyword.operator.logical.rr",
+          "match": "(?i)\\b(?:AND|OR|XOR)\\b"
+        },
+        {
+          "name": "keyword.operator.array.rr",
+          "match": "(?i)\\b(?:NIN|IN)\\b"
+        }
+      ]
+    },
+    "symbol-operator": {
+      "patterns": [
+        {
+          "name": "keyword.operator.comparison.rr",
+          "match": "<=|>=|<>|<|>|="
+        },
+        {
+          "name": "keyword.operator.concatenation.rr",
+          "match": "&"
+        },
+        {
+          "name": "keyword.operator.time.rr",
+          "match": ":"
+        },
+        {
+          "name": "keyword.operator.arithmetic.rr",
+          "match": "\\+|\\-|\\*|/|\\\\|%|\\^"
+        }
+      ]
+    },
+    "punctuation": {
+      "patterns": [
+        {
+          "name": "punctuation.separator.parameter.rr",
+          "match": ";"
+        },
+        {
+          "name": "punctuation.section.parens.begin.rr",
+          "match": "\\("
+        },
+        {
+          "name": "punctuation.section.parens.end.rr",
+          "match": "\\)"
+        }
+      ]
+    }
+  }
+}

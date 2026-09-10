@@ -1,42 +1,146 @@
 {
-  "name": "rr12",
-  "displayName": "RR12",
-  "description": "New language to support RR12 syntax.",
-  "version": "1.0.0",
+  "name": "rr",
+  "displayName": "RACE RESULT Expressions",
+  "description": "Syntax highlighting and formatting for RACE RESULT fields, functions and expressions.",
+  "version": "2.0.0",
+  "publisher": "brycelongacre",
   "engines": {
     "vscode": "^1.77.0"
   },
-  "devDependencies": {
-    "@types/vscode": "^1.98.0"
-  },
   "categories": [
-    "Programming Languages"
+    "Programming Languages",
+    "Formatters"
   ],
+  "keywords": [
+    "raceresult",
+    "race result",
+    "rr",
+    "formatter",
+    "expressions"
+  ],
+  "main": "./dist/extension.js",
+  "activationEvents": [],
   "contributes": {
     "languages": [
       {
-        "id": "rr12",
+        "id": "rr",
         "aliases": [
-          "rr12"
+          "RACE RESULT",
+          "rr"
         ],
         "extensions": [
-          ".rr12"
+          ".rr",
+          ".rr12",
+          ".rr14"
         ],
         "configuration": "./language-configuration.json"
       }
     ],
     "grammars": [
       {
-        "language": "rr12",
-        "scopeName": "source.rr12",
-        "path": "./syntaxes/rr12.tmLanguage.json"
+        "language": "rr",
+        "scopeName": "source.rr",
+        "path": "./syntaxes/rr.tmLanguage.json"
       }
     ],
-    "commands": [
+    "configurationDefaults": {
+      "[rr]": {
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true
+      }
+    },
+    "configuration": {
+      "title": "RACE RESULT",
+      "properties": {
+        "rr.format.printWidth": {
+          "type": "number",
+          "default": 80,
+          "minimum": 20,
+          "maximum": 500,
+          "description": "Maximum line length the formatter aims for. Expressions that fit stay on one line; longer ones expand one argument per line."
+        },
+        "rr.format.spaceAfterSeparator": {
+          "type": "boolean",
+          "default": true,
+          "description": "Put a space after the ';' that separates function parameters when the call stays on one line."
+        },
+        "rr.format.spacesAroundOperators": {
+          "type": "boolean",
+          "default": true,
+          "description": "Put a space on each side of binary operators. The time operator ':' is never spaced."
+        },
+        "rr.format.normalizeFunctionCase": {
+          "type": "boolean",
+          "default": true,
+          "description": "Rewrite known function names to their official casing (for example 'tsum' becomes 'TSum')."
+        },
+        "rr.format.uppercaseLogicalOperators": {
+          "type": "boolean",
+          "default": true,
+          "description": "Uppercase the word operators AND, OR, XOR, IN and NIN."
+        },
+        "rr.diagnostics.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Report syntax errors and unknown function names as you type."
+        }
+      }
+    },
+    "semanticTokenScopes": [
       {
-        "command": "extension.formatCustomLang",
-        "title": "Format CustomLang"
+        "language": "rr",
+        "scopes": {
+          "function.defaultLibrary": [
+            "support.function.rr"
+          ],
+          "function": [
+            "entity.name.function.rr"
+          ],
+          "variable": [
+            "variable.other.field.rr"
+          ],
+          "property": [
+            "variable.other.field.rr"
+          ],
+          "namespace": [
+            "support.type.field-prefix.rr"
+          ],
+          "keyword": [
+            "keyword.control.conditional.rr"
+          ],
+          "operator": [
+            "keyword.operator.rr"
+          ],
+          "number": [
+            "constant.numeric.rr"
+          ],
+          "string": [
+            "string.quoted.double.rr"
+          ],
+          "comment": [
+            "comment.block.rr"
+          ]
+        }
       }
     ]
+  },
+  "scripts": {
+    "gen:grammar": "node --experimental-strip-types --no-warnings tools/gen-grammar.ts",
+    "compile": "npm run gen:grammar && node esbuild.mjs",
+    "watch": "node esbuild.mjs --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "vscode:prepublish": "npm run compile -- --production",
+    "package": "npm run compile -- --production && npx --yes @vscode/vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "@types/vscode": "^1.77.0",
+    "esbuild": "^0.23.0",
+    "typescript": "^5.5.0",
+    "vitest": "^2.0.0",
+    "vscode-oniguruma": "^2.0.1",
+    "vscode-textmate": "^9.3.2"
   }
 }
