@@ -1,5 +1,8 @@
 node_modules
 dist
+.vscode-test
+
+# Build artifacts, except the published packages under releases/.
 *.vsix
 *.zip
-.vscode-test
+!releases/*.vsix

@@ -4,6 +4,8 @@ src/**
 test/**
 tools/**
 node_modules/**
+releases/**
+examples/**
 esbuild.mjs
 tsconfig.json
 vitest.config.ts

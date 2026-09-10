@@ -89,8 +89,23 @@ npm install
 npm test          # vitest, no extension host needed
 npm run compile   # regenerates the grammar, then bundles to dist/
 npm run typecheck
-npm run package   # builds a .vsix
+npm run package   # builds releases/rr-<version>.vsix
 ```
+
+### Releasing
+
+`npm run package` writes `releases/rr-<version>.vsix`, named from the `version`
+field in `package.json`. Bump that field and add a `CHANGELOG.md` entry first,
+then run it — the built packages are kept in the repo (they are the one
+exception to the `*.vsix` rule in `.gitignore`).
+
+To install a build locally:
+
+```
+code --install-extension releases/rr-2.0.0.vsix
+```
+
+or in VS Code: Extensions → `...` menu → **Install from VSIX...**
 
 Press **F5** to launch a second VS Code window with the extension loaded and
 `examples/scratch.rr` open.

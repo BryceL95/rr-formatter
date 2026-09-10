@@ -132,7 +132,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "vscode:prepublish": "npm run compile -- --production",
-    "package": "npm run compile -- --production && npx --yes @vscode/vsce package"
+    "package": "npm run compile -- --production && npx --yes @vscode/vsce package --out releases/"
   },
   "devDependencies": {
     "@types/node": "^20.14.0",
