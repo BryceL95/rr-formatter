@@ -6,6 +6,30 @@ copy into the software.
 
 Open any `.rr` file (`.rr12` and `.rr14` also work) and press **Shift+Alt+F**.
 
+## Install
+
+The extension is not on the Marketplace — install the packaged `.vsix` from the
+[latest release](https://github.com/BryceL95/rr-formatter/releases/latest).
+
+1. Download `rr-2.0.0.vsix` from the release page.
+2. In VS Code, open the Extensions view (**Ctrl+Shift+X**, **Cmd+Shift+X** on
+   macOS).
+3. Click the `...` menu at the top of the view and choose
+   **Install from VSIX...**, then pick the file you downloaded.
+4. Reload the window if VS Code asks.
+
+Or from a terminal, if `code` is on your `PATH`:
+
+```
+code --install-extension rr-2.0.0.vsix
+```
+
+Open a `.rr` file to confirm it worked: the status bar should show **RACE
+RESULT** as the language, and **Shift+Alt+F** should format the file.
+
+VS Code does not auto-update extensions installed this way. To upgrade, download
+the newer `.vsix` and install it the same way over the top.
+
 ## What it does
 
 **Formats like Prettier.** Short expressions stay on one line. Anything longer
